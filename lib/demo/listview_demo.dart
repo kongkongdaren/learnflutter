@@ -12,11 +12,11 @@ class ListViewDemo extends StatelessWidget{
           SizedBox(height: 16),
           Text(
             posts[index].title,
-            style: Theme.of(context).textTheme.title,
+            style: Theme.of(context).textTheme.subtitle1,
           ),
           Text(
             posts[index].author,
-            style: Theme.of(context).textTheme.subhead,
+            style: Theme.of(context).textTheme.subtitle2,
           ),
           SizedBox(height: 16,)
         ],
