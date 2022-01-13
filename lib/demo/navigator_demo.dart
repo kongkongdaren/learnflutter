@@ -8,17 +8,18 @@ class NavigatorDemo extends StatelessWidget {
          child: Row(
            mainAxisAlignment: MainAxisAlignment.center,
            children: [
-             FlatButton(
+             TextButton(
                  onPressed: null,
                  child: Text('Home'),
              ),
-             FlatButton(
+             TextButton(
                onPressed: (){
-                 Navigator.of(context).push(
-                     MaterialPageRoute(
-                       builder: (BuildContext context)=>Page(title:'About')
-                     )
-                 );
+                 // Navigator.of(context).push(
+                 //     MaterialPageRoute(
+                 //       builder: (BuildContext context)=>Pager(title:'About')
+                 //     )
+                 // );
+                 Navigator.pushNamed(context, '/about');
                },
                child: Text('About'),
              ),
@@ -30,23 +31,24 @@ class NavigatorDemo extends StatelessWidget {
   }
 }
 
-class Page extends StatelessWidget {
+class Pager extends StatelessWidget {
   final String title;
 
-   Page({
-     this.title
-   });
+  Pager({
+    this.title
+  });
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-       appBar: AppBar(
-         title: Text(title),
-         elevation: 0.0,
-       ),
+      appBar: AppBar(
+        title: Text(title),
+        elevation: 0.0,
+      ),
       floatingActionButton: FloatingActionButton(
-         child: Icon(Icons.arrow_back),
-        onPressed: (){
-           Navigator.pop(context);
+        child: Icon(Icons.arrow_back),
+        onPressed: () {
+          Navigator.pop(context);
         },
       ),
     );

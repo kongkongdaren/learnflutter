@@ -1,3 +1,4 @@
+
 import 'package:flutter/material.dart';
 import 'demo/listview_demo.dart';
 import 'demo/drawer_demo.dart';
@@ -6,18 +7,23 @@ import 'demo/basic_demo.dart';
 import 'demo/layout_demo.dart';
 import 'demo/view_demo.dart';
 import 'demo/sliver_demo.dart';
-import 'demo/navigator_demo.dart';
+import './demo/navigator_demo.dart';
 
-void main() {
-  runApp(App());
-}
+void main()=>runApp(App());
+
 
 class App extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: NavigatorDemo(),
+      // home: NavigatorDemo(),
+      initialRoute: '/home',
+      routes: {
+        '/':(context)=>NavigatorDemo(),
+        '/home':(context)=>Home(),
+        '/about': (context) => Pager(title:'About'),
+      },
       theme: ThemeData(
           primarySwatch: Colors.yellow,
           highlightColor: Color.fromRGBO(255, 255, 255, 0.5),
