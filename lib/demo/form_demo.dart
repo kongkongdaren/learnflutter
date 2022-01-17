@@ -26,36 +26,85 @@ class RegisterForm extends StatefulWidget {
 }
 
 class _RegisterFormState extends State<RegisterForm> {
+  final registerFormKey = GlobalKey<FormState>();
+  String username, password;
+  AutovalidateMode autovalidateMode = AutovalidateMode.disabled;
+
+  void submitRegisterForm() {
+    if(registerFormKey.currentState.validate()){
+      registerFormKey.currentState.save();
+
+      debugPrint('username:$username');
+      debugPrint('password:$password');
+      Scaffold.of(context).showSnackBar(
+        SnackBar(content: Text('Registering...'))
+      );
+    }else{
+      setState(() {
+        autovalidateMode=AutovalidateMode.always;
+      });
+    }
+
+  }
+
+  String validateUsername(value) {
+    if (value.isEmpty) {
+      return 'Username is required';
+    }
+    return null;
+  }
+
+  String validatePassword(value) {
+    if (value.isEmpty) {
+      return 'Password is required';
+    }
+    return null;
+  }
+
   @override
   Widget build(BuildContext context) {
     return Form(
+        key: registerFormKey,
         child: Column(
-      children: [
-        TextFormField(
-          decoration: InputDecoration(
-            labelText: 'Username',
-          ),
-        ),
-        TextFormField(
-          obscureText: true,
-          decoration: InputDecoration(
-            labelText: 'Password',
-          ),
-        ),
-        SizedBox(height: 32.0,),
-        Container(
-          width: double.infinity,
-          child: RaisedButton(
-              color: Theme.of(context).accentColor,
-              child: Text(
-                'Register',
-                style: TextStyle(color: Colors.white),
+          children: [
+            TextFormField(
+              decoration: InputDecoration(
+                labelText: 'Username',
+                helperText: '',
               ),
-              onPressed: () {}
+              onSaved: (value) {
+                username = value;
+              },
+              validator: validateUsername,
+              autovalidateMode: autovalidateMode,
+            ),
+            TextFormField(
+              obscureText: true,
+              decoration: InputDecoration(
+                labelText: 'Password',
+                helperText: '',
               ),
-        )
-      ],
-    ));
+              onSaved: (value) {
+                password = value;
+              },
+              validator: validatePassword,
+              autovalidateMode: autovalidateMode,
+            ),
+            SizedBox(
+              height: 32.0,
+            ),
+            Container(
+              width: double.infinity,
+              child: RaisedButton(
+                  color: Theme.of(context).accentColor,
+                  child: Text(
+                    'Register',
+                    style: TextStyle(color: Colors.white),
+                  ),
+                  onPressed: submitRegisterForm),
+            )
+          ],
+        ));
   }
 }
 
