@@ -9,6 +9,7 @@ import 'demo/sliver_demo.dart';
 import './demo/navigator_demo.dart';
 import './demo/form_demo.dart';
 import './demo/material_components.dart';
+import 'demo/state/state_management_demo.dart';
 
 void main() => runApp(App());
 
@@ -18,13 +19,14 @@ class App extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       // home: NavigatorDemo(),
-      initialRoute: '/mdc',
+      initialRoute: '/state-management',
       routes: {
         '/': (context) => NavigatorDemo(),
         '/home': (context) => Home(),
         '/about': (context) => Pager(title: 'About'),
         '/form': (context) => FormDemo(),
         '/mdc': (context) => MaterialComponents(),
+        '/state-management': (context) => StateManagementDemo(),
       },
       theme: ThemeData(
         primarySwatch: Colors.yellow,
