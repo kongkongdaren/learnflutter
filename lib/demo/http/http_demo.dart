@@ -57,9 +57,10 @@ class _HttpDemoHomeState extends State<HttpDemoHome> {
     // print('body:${response.body}');
     if(response.statusCode==200){
       final responseBody=json.decode(response.body);
-      List<Post> posts=responseBody['posts']
-      .map<Post>((item)=>Post.fromJson(item))
-      .toList();
+      List<Post> posts = responseBody['posts']
+          .map<Post>((item) => Post.fromJson(item))
+          .toList();
+      return posts;
     }else{
       throw Exception('Failed to fetch posts');
     }
